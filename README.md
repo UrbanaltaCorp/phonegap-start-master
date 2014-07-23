@@ -1,69 +1,31 @@
-# Hello World PhoneGap Application
+# Hello World PhoneGap Application using bluetoothle plugin
 
 > A Hello World application built with PhoneGap
 
-## Usage
+## Changes from Phonegap Hello World 
 
-### Desktop
+Download Hello World project: 
+	https://github.com/phonegap/phonegap-start
 
-In your browser, open the file:
+Modify index.html:
+	Delete:  <script type="text/javascript" src="cordova.js"></script>
+	Add: <script src="phonegap.js"></script>
+	Add: <script type="text/javascript" src="js/bluetoothle.js"></script> before index.js line.
+	
+Modify index.js:
+	Add a call to StartBluetooth() in function onDeviceReady().
 
-    /www/index.html
+Modify config.xml:
+Add to 3rd party plugins: 
+	<gap:plugin name="com.randdusing.bluetoothle" version="1.0.0" />
 
-### PhoneGap CLI
+Add file bluetoothle.js to the project.  This is nothing more than the example code
+by the plugin author with the initialize method called from StartBluetooth().
 
-This repository is automatically downloaded by [phonegap-cli][phonegap-cli-url]
-when you create a new application.
+	function StartBluetooth()
+	{
+		console.log("starting bluetooth");
+		bluetoothle.initialize(initializeSuccess, initializeError);
+	}
 
-### PhoneGap Build
-
-Create a new app with the following repository:
-
-    https://github.com/phonegap/phonegap-start.git
-
-### Nitrous.io
-
-First [setup nitrous.io][nitrous-url] to use this project.
-
-Then run the following commands in the nitrous.io terminal:
-
-    $ cd ~/workspace/phonegap-start
-    $ npm install -g phonegap
-    $ phonegap remote build android
-
-The last command requires an Adobe ID and will build your app on PhoneGap Build.
-
-## Contributors
-
-### Updating the Application
-
-The application is based on the [Apache Cordova Hello World][cordova-app] app.
-
-#### 1. Update the Source
-
-    cp cordova-app-hello-world/www www/
-
-__Do not replace `www/config.xml`.__
-
-__Do not replace `www/img/logo.png`.__
-
-#### 2. Update index.html
-
-Replace `<h1>Apache Cordova</h1>` with `<h1>PhoneGap</h1>`.
-
-#### 3. Update PhoneGap Version
-
-    <preference name="phonegap-version" value="x.x.x" />
-
-#### 4. Commit
-
-    $ git commit -am "Version x.x.x"
-
-#### 5. Tag
-
-    $ git tag x.x.x
-
-[phonegap-cli-url]: http://github.com/phonegap/phonegap-cli
-[cordova-app]: http://github.com/apache/cordova-app-hello-world
-[nitrous-url]: https://d3o0mnbgv6k92a.cloudfront.net/assets/hack-l-v1-3cc067e(https://www.nitrous.io/hack_button?source=embed&runtime=nodejs&repo=phonegap%2Fphonegap-start&file_to_open=README.md
 
