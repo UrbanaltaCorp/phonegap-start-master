@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        StartBluetooth();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -47,3 +48,56 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+
+
+
+var addressKey = "address";
+
+var heartRateServiceAssignedNumber = "180d";
+var heartRateMeasurementCharacteristicAssignedNumber = "2a37";
+var clientCharacteristicConfigDescriptorAssignedNumber = "2902";
+var batteryServiceAssignedNumber = "180f";
+var batteryLevelCharacteristicAssignedNumber = "2a19";
+
+var scanTimer = null;
+var connectTimer = null;
+var reconnectTimer = null;
+
+var iOSPlatform = "iOS";
+var androidPlatform = "Android";
+
+//var bluetoothle = require ('./bluetooth');
+
+function StartBluetooth()
+{
+	console.log("starting bluetooth");
+	bluetoothle.initialize(initializeSuccess, initializeError);
+}
+
+function initializeSuccess(obj)
+{
+  if (obj.status == "initialized")
+  {
+    var address = window.localStorage.getItem(addressKey);
+    if (address == null)
+    {
+        console.log("Bluetooth initialized successfully, starting scan for heart rate devices.");
+        var paramsObj = {"serviceAssignedNumbers":[heartRateServiceAssignedNumber]};
+        bluetoothle.startScan(startScanSuccess, startScanError, paramsObj);
+    }
+    else
+    {
+        connectDevice(address);
+    }
+  }
+  else
+  {
+    console.log("Unexpected initialize status: " + obj.status);
+  }
+}
+
+function initializeError(obj)
+{
+  console.log("Initialize error: " + obj.error + " - " + obj.message);
+}
