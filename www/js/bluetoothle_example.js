@@ -18,6 +18,7 @@ var reconnectTimer = null;
 var iOSPlatform = "iOS";
 var androidPlatform = "Android";
 
+var bluetoothle = require ('./bluetooth');
 
 function StartBluetooth()
 {
