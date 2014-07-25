@@ -52,6 +52,15 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+        
+      if (navigator.notification) {
+  		alert("navigator.notification lives");	    
+        navigator.notification.alert(message, null, title, 'OK DOK');
+      } else {
+        alert("No navigator.notification lives");
+        alert(title ? (title + ": " + message) : message);
+      }
+        
     }
 };
 
