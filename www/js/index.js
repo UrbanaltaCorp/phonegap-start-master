@@ -55,7 +55,7 @@ var app = {
         
       if (navigator.notification) {
   		alert("navigator.notification lives");	    
-        navigator.notification.alert(message, null, title, 'OK DOK');
+        navigator.notification.alert("This is a message", null, "My Title", 'OK DOK');
       } else {
         alert("No navigator.notification lives");
         alert(title ? (title + ": " + message) : message);
