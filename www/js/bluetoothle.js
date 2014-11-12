@@ -17,7 +17,11 @@ var reconnectTimer = null;
 var iOSPlatform = "iOS";
 var androidPlatform = "Android";
 
-bluetoothle.initialize(initializeSuccess, initializeError);
+function StartBluetooth()
+{
+    console.log("Starting Bluetooth Low Energy via bluetoothle.initialize...");
+    bluetoothle.initialize(initializeSuccess, initializeError);
+}
 
 function initializeSuccess(obj)
 {
